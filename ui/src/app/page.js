@@ -17,7 +17,7 @@ export default function Home() {
             <div className="red-circle">
               <h2
                 className="wish-text"
-                style={{ fontSize: "60px", paddingTop: "120px" }}
+                style={{ fontSize: "56px", paddingTop: "120px" }}
               >
                 Do you have any Wish?
               </h2>
@@ -31,7 +31,7 @@ export default function Home() {
               >
                 Rub And Click the Lamp
               </p>
-              <Link href={'/login'} passHref>
+              <Link href={'/intro'} passHref>
 
                   <Image
                     src={bg}

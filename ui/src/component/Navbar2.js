@@ -1,15 +1,17 @@
-import Link from "next/link";
-import img from '../images/2691-removebg-preview.png'
-import Image from "next/image";
+import React from 'react';
+import book from '../images/bookicon.png'
+import Image from 'next/image';
+import img from "../images/2691-removebg-preview.png"
+import Link from 'next/link';
 
 export default function Navbar() {
     return (
-        <>
+        <div>
+            {/* Offcanvas Menu */}
             <div
-                className="offcanvas offcanvas-start text-center "
+                className="offcanvas offcanvas-start text-center"
                 id="demo"
-                data-bs-animation="fade-in-down"
-                style={{ color: "#fff" }}
+                data-mdb-animation-start="fade-in-down"
             >
                 <div className="offcanvas-header">
                     <h1 className="offcanvas-title text-white main-headings">Wishlist</h1>
@@ -17,15 +19,13 @@ export default function Navbar() {
                         type="button"
                         className="btn-close text-reset bg-white"
                         data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                        style={{ filter: "invert(1)" }} // Ensures visibility in dark theme
                     ></button>
                 </div>
                 <div className="offcanvas-body mt-5">
-                    <Link href={'/'} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
+                <Link href={'/'} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
                         Home
                     </Link>
-                    <Link href={"/list"} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
+                    <Link href={'/list'} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
                         List
                     </Link>
                     <Link href={"/login"} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
@@ -62,23 +62,37 @@ export default function Navbar() {
                 </div>
             </div>
 
-            <p className="text-center mt-3 text-white">
-                Everything will be alright at the right moment
-            </p>
-            <div className="mt-4 ms-2">
-                <button
-                    className="btn text-center"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#demo"
-                >
-                    <ion-icon
-                        name="reorder-four-outline"
-                        size="large"
-                        className="text-white"
-                    ></ion-icon>
-                </button>
+            {/* Navbar */}
+            <div className="container-fluid">
+                <div className="row align-items-center mt-4 ms-2">
+                    <div className="col-auto">
+                        <button
+                            className="btn text-center"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#demo"
+                        >
+                            <ion-icon
+                                name="reorder-four-outline"
+                                size="large"
+                                className="text-white"
+                            ></ion-icon>
+                        </button>
+                    </div>
+                    <div className="col d-none d-md-block"></div>
+                    <div className="col-auto">
+                        <Link href={'/add'}>
+                            <Image
+                                src={book}
+                                alt="Magic Lamp"
+                                width={100}
+                                height={50}
+                                className="img-fluid"
+                            />
+                        </Link>
+                    </div>
+                </div>
             </div>
-        </>
+        </div>
     );
 }

@@ -40,7 +40,9 @@ title {
     color: bisque;
 }
 
-
+.form-container{
+    background-color: #CFDE00;
+}
 
 .bg-1{
     background-image: url(../images/bg1.png);
@@ -75,8 +77,8 @@ textarea.form-control {
     border-radius: 30px;
 }
 .submit-btn {
-    background-color: #CFDE00; 
-    color: black;
+    background-color: #000000; 
+    color: white;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
@@ -86,7 +88,8 @@ textarea.form-control {
     transition: all 0.3s ease-in-out;
 }
 .submit-btn:hover {
-    background-color: #e8f200; 
+    background-color: #646460; 
+    color: white;
 }
 .card {
     background-color: white;
