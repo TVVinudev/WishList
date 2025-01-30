@@ -1,0 +1,28 @@
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/WishList"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  f_name   String  @db.VarChar(50)
+  l_name   String  @db.VarChar(50)
+  userid   String  @unique @db.VarChar(100)
+  password String  @db.VarChar(255)
+  
+  // Relation: One User -> Many Wishes
+  wishes   Wishes[]
+}
+
+model Wishes {
+  id      Int     @id @default(autoincrement())  // Added Primary Key
+  name    String  @db.VarChar(100)
+  wish    String  @db.VarChar(255)
+
+  userId  Int     // Foreign key for relation
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
