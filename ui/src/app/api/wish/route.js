@@ -83,6 +83,33 @@ export async function PUT(req) {
     }
 }
 
+export async function PATCH(req) {
+    try {
+        const { status, wishId } = await req.json();
+
+        if (!status || !wishId) {
+            return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+        }
+
+        const db = await createConnection();
+
+        const [result] = await db.execute(
+            "UPDATE wishes SET status = ? WHERE wishId = ?",
+            [status, wishId]
+        );
+
+        if (result.affectedRows === 0) {
+            return NextResponse.json({ error: "Wish not found or not updated" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Wish updated successfully" }, { status: 200 });
+
+    } catch (error) {
+        console.error("Error updating wish:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
+}
+
 export async function DELETE(req) {
     try {
         const url = new URL(req.nextUrl);
