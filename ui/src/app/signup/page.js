@@ -8,12 +8,12 @@ export default function Login() {
                 <h1 className="mb-4 text-white">Sign Up</h1>
 
                 <div className="mb-4">
-                    <label className="form-label text-white">What's your First Name?</label>
-                    <input type="text" className="form-control" id="nameInput" placeholder="Enter your Userid" />
+                    <label className="form-label text-white">What's your Full Name?</label>
+                    <input type="text" className="form-control" id="nameInput" placeholder="Enter your Name" />
                 </div>
                 <div className="mb-4">
-                    <label  className="form-label text-white">What's your Last Name?</label>
-                    <input type="text" className="form-control" id="nameInput" placeholder="Enter your Userid" />
+                    <label  className="form-label text-white">What's your Email?</label>
+                    <input type="email" className="form-control" id="nameInput" placeholder="Enter your Email" />
                 </div>
 
                 <div className="mb-4">
