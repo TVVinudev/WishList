@@ -1,31 +1,20 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
 const secretKey = "school";
 
-export function authenticate(req) {
-    const cookies = req.headers.get("cookie"); 
-    if (!cookies) {
+export async function authenticate() {
+    const cookieStore = await cookies(); 
+    const token = cookieStore.get("wishToken")?.value;
+
+    if (!token) {
         return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
     }
 
     try {
-        const cookieArray = cookies.split(";");
-        let token = null;
-
-        for (let cooki of cookieArray) {
-            const [name, value] = cooki.trim().split("=");
-            if (name === "wishToken") {
-                token = value;
-                break;
-            }
-        }
-
-        if (!token) {
-            return NextResponse.json({ error: "Unauthorized: Token missing" }, { status: 401 });
-        }
-
         const verified = jwt.verify(token, secretKey);
+        console.log("User Verified:", verified);
         return verified; 
 
     } catch (error) {

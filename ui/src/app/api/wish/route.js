@@ -9,10 +9,10 @@ export async function GET(req) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-
         const db = await createConnection();
 
         const [datas] = await db.query("SELECT * FROM wishes WHERE username = ?", [user.userName]);
+        console.log(datas);
 
         return NextResponse.json({ data: datas }, { status: 200 });
 
@@ -26,6 +26,8 @@ export async function POST(req) {
     try {
 
         const user = await authenticate(req);
+        console.log(user.userName);
+
 
         const { wish, description } = await req.json();
 
@@ -58,17 +60,21 @@ export async function POST(req) {
 
 export async function PUT(req) {
     try {
-        const { wishId, newWish, newDescription } = await req.json();
 
-        if (!wishId || !newWish || !newDescription) {
+        const { wishId, newWish, newDescription, status } = await req.json();
+
+        console.log(wishId, newWish, newDescription, status);
+        
+
+        if (!wishId || !newWish || !newDescription || !status) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
 
         const db = await createConnection();
 
         const [result] = await db.execute(
-            "UPDATE wishes SET wish = ?, description = ? WHERE wishId = ?",
-            [newWish, newDescription, wishId]
+            "UPDATE wishes SET wish = ?, description = ?, status = ? WHERE wishId = ?",
+            [newWish, newDescription, status, wishId]
         );
 
         if (result.affectedRows === 0) {

@@ -4,10 +4,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export async function POST(req) {
+
     const secretKey = process.env.SECRET_KEY; 
 
     try {
         const { userName, password } = await req.json();
+
+        console.log(userName,password);
+        
 
         if (!userName || !password) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });

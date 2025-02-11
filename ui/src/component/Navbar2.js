@@ -1,13 +1,39 @@
+"use client";
+
 import React from 'react';
 import book from '../images/bookicon.png'
 import Image from 'next/image';
 import img from "../images/2691-removebg-preview.png"
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+
+    const router = useRouter();
+
+    async function handleLogout() {
+        try {
+            const resp = await fetch("/api/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+
+            if (resp.ok) {
+                toast.success("Logged out successfully!");
+                router.push("/login");
+                localStorage.setItem("user","");
+            } else {
+                toast.error("Logout failed. Try again.");
+            }
+        } catch (error) {
+            toast.error("Logout failed. Try again.");
+        }
+    }
+
+    
     return (
         <div>
-            {/* Offcanvas Menu */}
+    
             <div
                 className="offcanvas offcanvas-start text-center"
                 id="demo"
@@ -31,7 +57,7 @@ export default function Navbar() {
                     <Link href={"/login"} className="nav-link text-white hover-overlay hover-zoom hover-shadow">
                         Login
                     </Link>
-                    <Link href="#" className="nav-link text-white" aria-label="Logout">
+                    <button  onClick={handleLogout} className="nav-link text-white" aria-label="Logout">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -49,7 +75,7 @@ export default function Navbar() {
                                 d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
                             />
                         </svg>
-                    </Link>
+                    </button>
                 </div>
                 <div className="offcanvas-footer">
                     <Image
